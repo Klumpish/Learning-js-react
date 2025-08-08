@@ -29,3 +29,26 @@ const jay = 'Jay';
 
 console.log(jonas instanceof Person);
 console.log(jay instanceof Person);
+
+// Prototypes
+console.log(Person.prototype);
+
+Person.prototype.calcAge = function () {
+  console.log(2037 - this.birthYear);
+};
+
+jonas.calcAge();
+
+console.log(jonas.__proto__);
+console.log(jonas.__proto__ === Person.prototype);
+
+console.log(Person.prototype.isPrototypeOf(jonas)); //true
+console.log(Person.prototype.isPrototypeOf(Person)); // false
+
+//.prototypeOfLinkedObjects would be a better name for it
+
+Person.prototype.species = 'Homo Sapiens';
+console.log(jonas.species);
+
+console.log(jonas.hasOwnProperty('firstName')); //true
+console.log(jonas.hasOwnProperty('species')); // false
