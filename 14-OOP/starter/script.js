@@ -52,3 +52,57 @@ console.log(jonas.species);
 
 console.log(jonas.hasOwnProperty('firstName')); //true
 console.log(jonas.hasOwnProperty('species')); // false
+
+console.log(jonas.__proto__);
+console.log(jonas.__proto__.__proto__); //object.prototype top of the chain
+console.log(jonas.__proto__.__proto__.__proto__); //null
+
+console.dir(Person.prototype.constructor);
+
+const arr = [1, 3, 2, 5, 6, 1, 2]; // same as doing new Array === []
+console.log(arr.__proto__);
+console.log(arr.__proto__ === Array.prototype);
+
+// dont do this, it works but not a good idea when working with others
+// also next version of js might add a method with the same name and it breaks
+Array.prototype.unique = function () {
+  return [...new Set(this)];
+};
+
+console.log(arr.unique());
+
+const Car = function (model, speed) {
+  this.model = model;
+  this.speed = speed;
+};
+
+Car.prototype.accelerate = function () {
+  this.speed += 10;
+  console.log(`the ${this.model}'s new speed is ${this.speed}`);
+};
+
+Car.prototype.brake = function () {
+  this.speed -= 5;
+  console.log(`${this.model} is breaking, speed down to ${this.speed}`);
+};
+
+const bmw = new Car('BMW', 120);
+const Mercedes = new Car('Mercedes', 95);
+
+console.log(bmw);
+bmw.accelerate();
+bmw.brake();
+bmw.accelerate();
+bmw.brake();
+bmw.accelerate();
+bmw.brake();
+bmw.accelerate();
+bmw.brake();
+Mercedes.accelerate();
+Mercedes.brake();
+Mercedes.accelerate();
+Mercedes.brake();
+Mercedes.accelerate();
+Mercedes.brake();
+Mercedes.accelerate();
+Mercedes.brake();
