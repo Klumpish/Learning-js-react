@@ -113,4 +113,73 @@
 const PerconCl = class {};
 
 // class declaration
-class PersonCL {}
+class PersonCL {
+  constructor(fullName, birthYear) {
+    this.fullName = fullName;
+    this.birthYear = birthYear;
+  }
+  //   methods will be added to .prototype property
+  calcAge() {
+    console.log(2037 - this.birthYear);
+  }
+
+  greet() {
+    console.log(`Hey, ${this.fullName}`);
+  }
+
+  get age() {
+    return 2037 - this.birthYear;
+  }
+
+  //   set a property that already exists
+  set fullName(name) {
+    console.log(name);
+    if (name.includes(' ')) this._fullName = name;
+    else alert(`${name} is not a full name!`);
+  }
+
+  get fullName() {
+    return this._fullName;
+  }
+}
+
+const jessica = new PersonCL('Jessica Davis', 1996);
+
+console.log(jessica);
+jessica.calcAge();
+console.log(jessica.age);
+
+console.log(jessica.__proto__ === PersonCL.prototype);
+
+// PersonCL.prototype.greet = function () {
+//   console.log(`Hey ${this.firstName}`);
+// };
+jessica.greet();
+
+// 1. classes are NOT hoisted
+// 2. Classes are first-class citizens
+// 3. Classes are executed in strict mode
+
+const walter = new PersonCL('Walter white', 1965);
+
+// getter and setters
+
+const account = {
+  owner: 'jonas',
+  movements: [200, 530, 120, 300],
+
+  // getter
+  get latest() {
+    return this.movements.slice(-1).pop();
+  },
+
+  set latest(mov) {
+    this.movements.push(mov);
+  },
+};
+
+// here we use the getter with out calling it
+console.log(account.latest);
+account.latest = 50;
+
+console.log(account.movements);
